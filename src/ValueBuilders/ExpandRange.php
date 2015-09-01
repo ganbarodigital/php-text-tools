@@ -65,8 +65,8 @@ class ExpandRange
         RequireTraversable::checkMixed($data, E4xx_UnsupportedType::class);
 
         $retval=[];
-        foreach ($data as $range) {
-            $retval[] = self::fromString($range);
+        foreach ($data as $key => $range) {
+            $retval[$key] = self::fromString($range);
         }
 
         return $retval;
