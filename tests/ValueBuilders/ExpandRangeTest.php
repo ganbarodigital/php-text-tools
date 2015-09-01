@@ -108,7 +108,88 @@ class ExpandRangeTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($expectedResult, $actualResult);
     }
 
+    /**
+     * @covers ::fromTraversable
+     * @dataProvider provideArrayRangesToExpand
+     */
+    public function testStaticallyExpandArrays($range, $expectedResult)
+    {
+        // ----------------------------------------------------------------
+        // setup your test
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $actualResult = ExpandRange::fromTraversable($range);
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertEquals($expectedResult, $actualResult);
+    }
+
+    /**
+     * @covers ::fromString
+     * @dataProvider provideStringRangesToExpand
+     */
+    public function testStaticallyExpandStrings($range, $expectedResult)
+    {
+        // ----------------------------------------------------------------
+        // setup your test
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $actualResult = ExpandRange::fromString($range);
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertEquals($expectedResult, $actualResult);
+    }
+
+    /**
+     * @covers ::fromString
+     */
+    public function testPreservesRangesInReverseOrder()
+    {
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $range = "12-6";
+        $expectedResult = range(12, 6);
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $actualResult = ExpandRange::fromString($range);
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertEquals($expectedResult, $actualResult);
+    }
+
+
     public function provideRangesToExpand()
+    {
+        return array_merge(
+            $this->provideStringRangesToExpand(),
+            $this->provideArrayRangesToExpand()
+        );
+    }
+
+    public function provideArrayRangesToExpand()
+    {
+        return [
+            [
+                [ "1-50", "2-5", "11-12" ],
+                [ range(1, 50), range(2,5), range(11,12) ]
+            ]
+        ];
+    }
+
+    public function provideStringRangesToExpand()
     {
         return [
             [ "0-9", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] ],

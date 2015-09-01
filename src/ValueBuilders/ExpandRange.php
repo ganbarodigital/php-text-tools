@@ -59,7 +59,7 @@ class ExpandRange
      * @return array
      *         the expanded ranges
      */
-    public static function fromArray($data)
+    public static function fromTraversable($data)
     {
         // robustness!
         RequireTraversable::checkMixed($data, E4xx_UnsupportedType::class);
@@ -89,10 +89,7 @@ class ExpandRange
             throw new E4xx_CannotParseRange($data);
         }
 
-        $min = min((int)$matches[1], (int)$matches[2]);
-        $max = max((int)$matches[1], (int)$matches[2]);
-
-        return range($min, $max);
+        return range((int)$matches[1], (int)$matches[2]);
     }
 
     /**
