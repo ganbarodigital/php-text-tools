@@ -51,7 +51,7 @@ use PHPUnit_Framework_TestCase;
 class ExpandRangeTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * @covers ::__construct
+     * @coversNothing
      */
     public function testCanInstantiate()
     {
