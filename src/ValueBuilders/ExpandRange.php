@@ -51,6 +51,14 @@ use GanbaroDigital\TextTools\Exceptions\E4xx_UnsupportedType;
 
 class ExpandRange
 {
+    /**
+     * expand a list of ranges
+     *
+     * @param  array|Traversable $data
+     *         the list of ranges to expand
+     * @return array
+     *         the expanded ranges
+     */
     public static function fromArray($data)
     {
         // robustness!
@@ -64,6 +72,14 @@ class ExpandRange
         return $retval;
     }
 
+    /**
+     * expand a range in the form "n-m"
+     *
+     * @param  string $data
+     *         the range to expand
+     * @return array
+     *         the values are the range
+     */
     public static function fromString($data)
     {
         RequireStringy::checkMixed($data, E4xx_UnsupportedType::class);
@@ -79,12 +95,28 @@ class ExpandRange
         return range($min, $max);
     }
 
+    /**
+     * expand a range in the form "n-m"
+     *
+     * @param  mixed $data
+     *         the range to expand
+     * @return mixed
+     *         the values are the range
+     */
     public static function from($data)
     {
         $method = FirstMethodMatchingType::fromMixed($data, self::class, 'from', E4xx_UnsupportedType::class);
         return self::$method($data, $columnNos, $columnSeparator, $lineSeparator);
     }
 
+    /**
+     * expand a range in the form "n-m"
+     *
+     * @param  mixed $data
+     *         the range to expand
+     * @return mixed
+     *         the values are the range
+     */
     public function __invoke($data)
     {
         return self::from($data);
