@@ -84,13 +84,7 @@ class ExpandRange
     public static function fromString($data)
     {
         RequireStringy::checkMixed($data, E4xx_UnsupportedType::class);
-
-        $regex = "/([0-9]+)-([0-9]+)/";
-        if (!preg_match($regex, $data, $matches)) {
-            throw new E4xx_CannotParseRange($data);
-        }
-
-        return range((int)$matches[1], (int)$matches[2]);
+        return self::parseString($data);
     }
 
     /**
@@ -118,5 +112,29 @@ class ExpandRange
     public function __invoke($data)
     {
         return self::from($data);
+    }
+
+    private static function parseString($data)
+    {
+        $retval = [];
+        $parts = explode(",", $data);
+        foreach ($parts as $part) {
+            $retval = array_merge($retval, self::parseRange($part));
+        }
+
+        return $retval;
+    }
+
+    private static function parseRange($data)
+    {
+        $regex = "/^[ ]*([0-9]+)-([0-9]+)$|^[ ]*([0-9]+)$/";
+        if (!preg_match($regex, $data, $matches)) {
+            throw new E4xx_CannotParseRange($data);
+        }
+
+        if (isset($matches[3])) {
+            return [(int)$matches[3]];
+        }
+        return range((int)$matches[1], (int)$matches[2]);
     }
 }

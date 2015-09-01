@@ -2,7 +2,9 @@
 
 ## develop branch
 
-Nothing yet.
+### New
+
+* ExpandRange - now supports comma-separated ranges, and single numbers (e.g. "3, 6-8, 10")
 
 ## 1.0.0 - Tue Sep 1 2015
 
