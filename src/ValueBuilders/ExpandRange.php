@@ -114,6 +114,20 @@ class ExpandRange
         return self::from($data);
     }
 
+    /**
+     * parse a string that contains 1 or more ranges
+     *
+     * ranges can be of the form:
+     *
+     *   X
+     *   N-M
+     *   X, N-M
+     *
+     * @param  string $data
+     *         the string to parse
+     * @return array
+     *         the ranges from the string
+     */
     private static function parseString($data)
     {
         $retval = [];
@@ -125,6 +139,14 @@ class ExpandRange
         return $retval;
     }
 
+    /**
+     * parse a string that contains a single range
+     *
+     * @param  string $data
+     *         the string to parse
+     * @return array
+     *         the range from the string
+     */
     private static function parseRange($data)
     {
         $regex = "/^[ ]*([0-9]+)-([0-9]+)$|^[ ]*([0-9]+)$/";
