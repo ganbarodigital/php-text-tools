@@ -106,7 +106,7 @@ class ExpandRange
     public static function from($data)
     {
         $method = FirstMethodMatchingType::fromMixed($data, self::class, 'from', E4xx_UnsupportedType::class);
-        return self::$method($data, $columnNos, $columnSeparator, $lineSeparator);
+        return self::$method($data);
     }
 
     /**
