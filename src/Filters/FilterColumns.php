@@ -78,14 +78,14 @@ class FilterColumns
     /**
      * extract the columns from an array of strings
      *
-     * @param  string $data
+     * @param  array|Traversable $data
      *         the data to be filtered
      * @param  string $columnNos
      *         the columns to be extracted
      * @param  string $columnSeparator
      *         the column delimiter
-     * @return string
-     *         the filtered string
+     * @return array
+     *         a list of the filtered strings
      */
     public static function fromTraversable($data, $columnNos, $columnSeparator)
     {
