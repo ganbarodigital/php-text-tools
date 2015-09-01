@@ -38,7 +38,7 @@
  * @author    Stuart Herbert <stuherbert@ganbarodigital.com>
  * @copyright 2015-present Ganbaro Digital Ltd www.ganbarodigital.com
  * @license   http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @link      http://code.ganbarodigital.com/php-process-runner
+ * @link      http://code.ganbarodigital.com/php-text-tools
  */
 
 namespace GanbaroDigital\TextTools\Exceptions;
