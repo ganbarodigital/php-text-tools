@@ -88,6 +88,68 @@ class FilterColumnsTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($expectedResult, $actualResult);
     }
 
+    /**
+     * @covers ::from
+     * @dataProvider provideDataToFilter
+     */
+    public function testCanCallStatically($data, $columnNos, $expectedResult)
+    {
+        // ----------------------------------------------------------------
+        // setup your test
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $actualResult = FilterColumns::from($data, $columnNos, ' ', PHP_EOL);
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertEquals($expectedResult, $actualResult);
+    }
+
+    /**
+     * @covers ::fromTraversable
+     * @covers ::filterArray
+     * @dataProvider provideArraysToFilter
+     */
+    public function testCanStaticallyFilterArrays($data, $columnNos, $expectedResult)
+    {
+        // ----------------------------------------------------------------
+        // setup your test
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $actualResult = FilterColumns::fromTraversable($data, $columnNos, ' ', PHP_EOL);
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertEquals($expectedResult, $actualResult);
+    }
+
+    /**
+     * @covers ::fromString
+     * @covers ::filterLine
+     * @dataProvider provideStringsToFilter
+     */
+    public function testCanStaticallyFilterStrings($data, $columnNos, $expectedResult)
+    {
+        // ----------------------------------------------------------------
+        // setup your test
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $actualResult = FilterColumns::fromString($data, $columnNos, ' ', PHP_EOL);
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertEquals($expectedResult, $actualResult);
+    }
+
     public function provideDataToFilter()
     {
         return array_merge($this->provideStringsToFilter(), $this->provideArraysToFilter());
