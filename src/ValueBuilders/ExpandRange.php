@@ -47,6 +47,7 @@ use GanbaroDigital\Reflection\Requirements\RequireNumeric;
 use GanbaroDigital\Reflection\Requirements\RequireTraversable;
 use GanbaroDigital\Reflection\Requirements\RequireStringy;
 use GanbaroDigital\Reflection\ValueBuilders\FirstMethodMatchingType;
+use GanbaroDigital\TextTools\Exceptions\E4xx_CannotParseRange;
 use GanbaroDigital\TextTools\Exceptions\E4xx_UnsupportedType;
 
 class ExpandRange

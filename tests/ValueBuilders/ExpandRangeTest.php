@@ -170,6 +170,23 @@ class ExpandRangeTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($expectedResult, $actualResult);
     }
 
+    /**
+     * @covers ::fromString
+     * @dataProvider provideIllegalRangeStrings
+     *
+     * @expectedException GanbaroDigital\TextTools\Exceptions\E4xx_CannotParseRange
+     */
+    public function testThrowsExceptionWhenIllegalRangeReceived($range)
+    {
+        // ----------------------------------------------------------------
+        // setup your test
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        ExpandRange::fromString($range);
+
+    }
 
     public function provideRangesToExpand()
     {
@@ -195,6 +212,14 @@ class ExpandRangeTest extends PHPUnit_Framework_TestCase
             [ "0-9", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] ],
             [ "4-7", [4, 5, 6, 7 ] ],
             [ "8-100", range(8, 100) ],
+        ];
+    }
+
+    public function provideIllegalRangeStrings()
+    {
+        return [
+            [ "1-" ],
+            [ "a-b" ]
         ];
     }
 }
