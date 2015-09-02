@@ -43,9 +43,11 @@
 
 namespace GanbaroDigital\TextTools\Filters;
 
+use GanbaroDigital\Reflection\Requirements\RequirePcreRegex;
 use GanbaroDigital\Reflection\Requirements\RequireStringy;
 use GanbaroDigital\Reflection\Requirements\RequireTraversable;
 use GanbaroDigital\Reflection\ValueBuilders\FirstMethodMatchingType;
+use GanbaroDigital\TextTools\Exceptions\E4xx_InvalidPcreRegex;
 use GanbaroDigital\TextTools\Exceptions\E4xx_UnsupportedType;
 
 class FilterForMatchingRegex
@@ -65,7 +67,7 @@ class FilterForMatchingRegex
     {
         // robustness!
         RequireStringy::checkMixed($data, E4xx_UnsupportedType::class);
-        RequireStringy::checkMixed($searchRegex, E4xx_UnsupportedType::class);
+        RequirePcreRegex::check($searchRegex, E4xx_InvalidPcreRegex::class);
 
         return self::matchLine($data, $searchRegex);
     }
@@ -85,7 +87,7 @@ class FilterForMatchingRegex
     {
         // robustness!
         RequireTraversable::checkMixed($data, E4xx_UnsupportedType::class);
-        RequireStringy::checkMixed($searchRegex, E4xx_UnsupportedType::class);
+        RequirePcreRegex::check($searchRegex, E4xx_InvalidPcreRegex::class);
 
         return self::matchArray($data, $searchRegex);
     }

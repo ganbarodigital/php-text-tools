@@ -4,11 +4,15 @@
 
 ### New
 
-* ExpandRange - now supports comma-separated ranges, and single numbers (e.g. "3, 6-8, 10")
+* Exceptions\E4xx_InvalidPcreRegex - thrown whenever we are given a PCRE regex that does not compile
 * Filters\FilterForMatchingRegex - simple regex `grep` like utility class
 * Filters\FilterOutMatchingRegex - simple regex `grep -v` like utility class
 * Filters\FilterForMatchingString - simple non-regex `grep` like utility class
 * Filters\FilterOutMatchingString - simple non-regex `grep -v` like utility class
+
+### Updated
+
+* ValueBuilders\ExpandRange - now supports comma-separated ranges, and single numbers (e.g. "3, 6-8, 10")
 
 ## 1.0.0 - Tue Sep 1 2015
 
