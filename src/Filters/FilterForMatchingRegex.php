@@ -91,7 +91,7 @@ class FilterForMatchingRegex
     }
 
     /**
-     * return the parts of $data that contain the search string
+     * return the parts of $data that match the regex
      *
      * @param  mixed $data
      *         the collection of input strings to check
@@ -108,7 +108,7 @@ class FilterForMatchingRegex
     }
 
     /**
-     * return the parts of $data that contain the search string
+     * return the parts of $data that match the regex
      *
      * @param  mixed $data
      *         the collection of input strings to check
@@ -124,7 +124,7 @@ class FilterForMatchingRegex
     }
 
     /**
-     * search an array for values that contain the search string
+     * search an array for values that match the regex
      *
      * @param  array|Traversable $data
      *         the array to search
@@ -151,7 +151,7 @@ class FilterForMatchingRegex
     }
 
     /**
-     * does the input string contain the search string?
+     * does the input string match the regex?
      *
      * @param  string $line
      *         the input string to check
