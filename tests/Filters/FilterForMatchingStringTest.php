@@ -34,21 +34,21 @@
  * POSSIBILITY OF SUCH DAMAGE.
  *
  * @category  Libraries
- * @package   TextTools/ValueBuilders
+ * @package   TextTools/Filters
  * @author    Stuart Herbert <stuherbert@ganbarodigital.com>
  * @copyright 2015-present Ganbaro Digital Ltd www.ganbarodigital.com
  * @license   http://www.opensource.org/licenses/bsd-license.php  BSD License
  * @link      http://code.ganbarodigital.com/php-text-tools
  */
 
-namespace GanbaroDigital\TextTools\ValueBuilders;
+namespace GanbaroDigital\TextTools\Filters;
 
 use PHPUnit_Framework_TestCase;
 
 /**
- * @coversDefaultClass GanbaroDigital\TextTools\ValueBuilders\ExpandRange
+ * @coversDefaultClass GanbaroDigital\TextTools\Filters\FilterForMatchingString
  */
-class ExpandRangeTest extends PHPUnit_Framework_TestCase
+class FilterForMatchingStringTest extends PHPUnit_Framework_TestCase
 {
     /**
      * @coversNothing
@@ -58,29 +58,29 @@ class ExpandRangeTest extends PHPUnit_Framework_TestCase
         // ----------------------------------------------------------------
         // setup your test
 
-        $obj = new ExpandRange;
+        $obj = new FilterForMatchingString;
 
         // ----------------------------------------------------------------
         // test the results
 
-        $this->assertTrue($obj instanceof ExpandRange);
+        $this->assertTrue($obj instanceof FilterForMatchingString);
     }
 
     /**
      * @covers ::__invoke
-     * @dataProvider provideRangesToExpand
+     * @dataProvider provideDataToMatch
      */
-    public function testCanUseAsObject($range, $expectedResult)
+    public function testCanUseAsObject($data, $searchString, $expectedResult)
     {
         // ----------------------------------------------------------------
         // setup your test
 
-        $obj = new ExpandRange;
+        $obj = new FilterForMatchingString;
 
         // ----------------------------------------------------------------
         // perform the change
 
-        $actualResult = $obj($range);
+        $actualResult = $obj($data, $searchString);
 
         // ----------------------------------------------------------------
         // test the results
@@ -89,10 +89,10 @@ class ExpandRangeTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers ::from
-     * @dataProvider provideRangesToExpand
+     * @covers ::against
+     * @dataProvider provideDataToMatch
      */
-    public function testCanCallStatically($range, $expectedResult)
+    public function testCanCallStatically($data, $searchString, $expectedResult)
     {
         // ----------------------------------------------------------------
         // setup your test
@@ -100,7 +100,7 @@ class ExpandRangeTest extends PHPUnit_Framework_TestCase
         // ----------------------------------------------------------------
         // perform the change
 
-        $actualResult = ExpandRange::from($range);
+        $actualResult = FilterForMatchingString::against($data, $searchString);
 
         // ----------------------------------------------------------------
         // test the results
@@ -109,13 +109,12 @@ class ExpandRangeTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers ::fromTraversable
-     * @covers ::fromString
-     * @covers ::parseString
-     * @covers ::parseRange
-     * @dataProvider provideArrayRangesToExpand
+     * @covers ::againstTraversable
+     * @covers ::matchArray
+     * @covers ::matchLine
+     * @dataProvider provideArraysToMatch
      */
-    public function testStaticallyExpandArrays($range, $expectedResult)
+    public function testCanStaticallyMatchArrays($data, $searchString, $expectedResult)
     {
         // ----------------------------------------------------------------
         // setup your test
@@ -123,7 +122,7 @@ class ExpandRangeTest extends PHPUnit_Framework_TestCase
         // ----------------------------------------------------------------
         // perform the change
 
-        $actualResult = ExpandRange::fromTraversable($range);
+        $actualResult = FilterForMatchingString::againstTraversable($data, $searchString);
 
         // ----------------------------------------------------------------
         // test the results
@@ -132,12 +131,11 @@ class ExpandRangeTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers ::fromString
-     * @covers ::parseString
-     * @covers ::parseRange
-     * @dataProvider provideStringRangesToExpand
+     * @covers ::againstString
+     * @covers ::matchLine
+     * @dataProvider provideStringsToMatch
      */
-    public function testStaticallyExpandStrings($range, $expectedResult)
+    public function testCanStaticallyFilterStrings($data, $searchString, $expectedResult)
     {
         // ----------------------------------------------------------------
         // setup your test
@@ -145,7 +143,7 @@ class ExpandRangeTest extends PHPUnit_Framework_TestCase
         // ----------------------------------------------------------------
         // perform the change
 
-        $actualResult = ExpandRange::fromString($range);
+        $actualResult = FilterForMatchingString::againstString($data, $searchString);
 
         // ----------------------------------------------------------------
         // test the results
@@ -153,83 +151,37 @@ class ExpandRangeTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($expectedResult, $actualResult);
     }
 
-    /**
-     * @covers ::fromString
-     * @covers ::parseString
-     * @covers ::parseRange
-     */
-    public function testPreservesRangesInReverseOrder()
+    public function provideDataToMatch()
     {
-        // ----------------------------------------------------------------
-        // setup your test
-
-        $range = "12-6";
-        $expectedResult = range(12, 6);
-
-        // ----------------------------------------------------------------
-        // perform the change
-
-        $actualResult = ExpandRange::fromString($range);
-
-        // ----------------------------------------------------------------
-        // test the results
-
-        $this->assertEquals($expectedResult, $actualResult);
+        return array_merge($this->provideStringsToMatch(), $this->provideArraysToMatch());
     }
 
-    /**
-     * @covers ::fromString
-     * @covers ::parseString
-     * @covers ::parseRange
-     * @dataProvider provideIllegalRangeStrings
-     *
-     * @expectedException GanbaroDigital\TextTools\Exceptions\E4xx_CannotParseRange
-     */
-    public function testThrowsExceptionWhenIllegalRangeReceived($range)
-    {
-        // ----------------------------------------------------------------
-        // setup your test
-
-        // ----------------------------------------------------------------
-        // perform the change
-
-        ExpandRange::fromString($range);
-
-    }
-
-    public function provideRangesToExpand()
-    {
-        return array_merge(
-            $this->provideStringRangesToExpand(),
-            $this->provideArrayRangesToExpand()
-        );
-    }
-
-    public function provideArrayRangesToExpand()
+    public function provideArraysToMatch()
     {
         return [
             [
-                [ "1-50", "2-5", "11-12" ],
-                [ range(1, 50), range(2,5), range(11,12) ]
+                [
+                    "  502 42544     1   0  5:37pm ??         0:00.02 /System/Library/CoreServices/AirPort Base Station Agent.app/Contents/MacOS/AirPort Base Station Agent --launchd",
+                    "    0 42759     1   0  6:36pm ??         0:00.26 /usr/sbin/ocspd",
+                    "  502 42790     1   0  6:41pm ??         0:00.35 /System/Library/Frameworks/CoreServices.framework/Frameworks/Metadata.framework/Versions/A/Support/mdworker -s mdworker -c MDSImporterWorker -m com.apple.mdworker.shared",
+                ],
+                "Library",
+                [
+                    "  502 42544     1   0  5:37pm ??         0:00.02 /System/Library/CoreServices/AirPort Base Station Agent.app/Contents/MacOS/AirPort Base Station Agent --launchd",
+                    "  502 42790     1   0  6:41pm ??         0:00.35 /System/Library/Frameworks/CoreServices.framework/Frameworks/Metadata.framework/Versions/A/Support/mdworker -s mdworker -c MDSImporterWorker -m com.apple.mdworker.shared",
+                ]
+            ],
+        ];
+    }
+
+    public function provideStringsToMatch()
+    {
+        return [
+            [
+                "  501 42435 38008   0  9:33AM ??         0:00.13 php vendor/bin/phpunit -c phpunit.xml.dist FilterColumnsTest tests/Filters/FilterColumnsTest.php",
+                "vendor",
+                "  501 42435 38008   0  9:33AM ??         0:00.13 php vendor/bin/phpunit -c phpunit.xml.dist FilterColumnsTest tests/Filters/FilterColumnsTest.php",
             ]
-        ];
-    }
-
-    public function provideStringRangesToExpand()
-    {
-        return [
-            [ "0-9", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] ],
-            [ "4-7", [4, 5, 6, 7 ] ],
-            [ "8-100", range(8, 100) ],
-            [ "3, 6-8, 10", [3, 6, 7, 8, 10] ],
-        ];
-    }
-
-    public function provideIllegalRangeStrings()
-    {
-        return [
-            [ "1-" ],
-            [ "a-b" ]
         ];
     }
 }

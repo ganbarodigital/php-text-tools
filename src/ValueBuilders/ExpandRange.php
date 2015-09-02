@@ -84,13 +84,7 @@ class ExpandRange
     public static function fromString($data)
     {
         RequireStringy::checkMixed($data, E4xx_UnsupportedType::class);
-
-        $regex = "/([0-9]+)-([0-9]+)/";
-        if (!preg_match($regex, $data, $matches)) {
-            throw new E4xx_CannotParseRange($data);
-        }
-
-        return range((int)$matches[1], (int)$matches[2]);
+        return self::parseString($data);
     }
 
     /**
@@ -118,5 +112,51 @@ class ExpandRange
     public function __invoke($data)
     {
         return self::from($data);
+    }
+
+    /**
+     * parse a string that contains 1 or more ranges
+     *
+     * ranges can be of the form:
+     *
+     *   X
+     *   N-M
+     *   X, N-M
+     *
+     * @param  string $data
+     *         the string to parse
+     * @return array
+     *         the ranges from the string
+     */
+    private static function parseString($data)
+    {
+        $retval = [];
+        $parts = explode(",", $data);
+        foreach ($parts as $part) {
+            $retval = array_merge($retval, self::parseRange($part));
+        }
+
+        return $retval;
+    }
+
+    /**
+     * parse a string that contains a single range
+     *
+     * @param  string $data
+     *         the string to parse
+     * @return array
+     *         the range from the string
+     */
+    private static function parseRange($data)
+    {
+        $regex = "/^[ ]*([0-9]+)-([0-9]+)$|^[ ]*([0-9]+)$/";
+        if (!preg_match($regex, $data, $matches)) {
+            throw new E4xx_CannotParseRange($data);
+        }
+
+        if (isset($matches[3])) {
+            return [(int)$matches[3]];
+        }
+        return range((int)$matches[1], (int)$matches[2]);
     }
 }

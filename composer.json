@@ -7,7 +7,7 @@
     ],
     "require": {
         "php": ">= 5.5",
-        "ganbarodigital/php-reflection": "^2.8",
+        "ganbarodigital/php-reflection": "^2.9",
         "ganbarodigital/php-exceptions": "^1.1",
         "ganbarodigital/php-defensive": "^1.0.1"
     },
