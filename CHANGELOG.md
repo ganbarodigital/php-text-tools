@@ -2,6 +2,10 @@
 
 ## develop branch
 
+Nothing yet.
+
+## 1.1.1 - Wed Sep 2 2015
+
 ### Fixes
 
 * Filters\FilterColumns - resolve 'undefined offset' in PHP 5.5 and earlier
