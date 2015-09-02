@@ -5,6 +5,7 @@
 ### New
 
 * ExpandRange - now supports comma-separated ranges, and single numbers (e.g. "3, 6-8, 10")
+* Filters\FilterForMatchingRegex - simple regex `grep`-like utility class
 * Filters\FilterForMatchingString - simple non-regex `grep`-like utility class
 * Filters\FilterOutMatchingString - simple non-regex `grep -v`-like utility class
 
