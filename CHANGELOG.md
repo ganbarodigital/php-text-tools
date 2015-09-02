@@ -2,6 +2,10 @@
 
 ## develop branch
 
+Nothing yet.
+
+## 1.1.0 - Wed Sep 2 2015 
+
 ### New
 
 * Exceptions\E4xx_InvalidPcreRegex - thrown whenever we are given a PCRE regex that does not compile
