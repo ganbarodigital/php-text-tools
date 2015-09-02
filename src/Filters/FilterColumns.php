@@ -181,6 +181,10 @@ class FilterColumns
             if ($currentCol == $columnNos[0]) {
                 $retval[] = $part;
                 array_shift($columnNos);
+
+                if (count($columnNos) == 0) {
+                    break;
+                }
             }
 
             $currentCol++;
