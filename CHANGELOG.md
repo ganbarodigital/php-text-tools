@@ -4,6 +4,12 @@
 
 Nothing yet.
 
+## 1.1.2 - Wed Sep 2 2015
+
+### Fixes
+
+* Filters\FilterColumns - fix types in docblock
+
 ## 1.1.1 - Wed Sep 2 2015
 
 ### Fixes

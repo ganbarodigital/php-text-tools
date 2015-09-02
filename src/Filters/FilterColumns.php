@@ -101,14 +101,14 @@ class FilterColumns
     /**
      * extract the columns from a string
      *
-     * @param  string $data
+     * @param  mixed $data
      *         the data to be filtered
      * @param  string $columnNos
      *         the columns to be extracted
      * @param  string $columnSeparator
      *         the column delimiter
-     * @return string
-     *         the filtered string
+     * @return mixed
+     *         the filtered data
      */
     public static function from($data, $columnNos, $columnSeparator)
     {
@@ -119,14 +119,14 @@ class FilterColumns
     /**
      * extract the columns from a string
      *
-     * @param  string $data
+     * @param  mixed $data
      *         the data to be filtered
      * @param  string $columnNos
      *         the columns to be extracted
      * @param  string $columnSeparator
      *         the column delimiter
-     * @return string
-     *         the filtered string
+     * @return mixed
+     *         the filtered data
      */
     public function __invoke($data, $columnNos, $columnSeparator)
     {
