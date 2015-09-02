@@ -181,6 +181,11 @@ class FilterColumnsTest extends PHPUnit_Framework_TestCase
                 "  501 42435 38008   0  9:33AM ??         0:00.13 php vendor/bin/phpunit -c phpunit.xml.dist FilterColumnsTest tests/Filters/FilterColumnsTest.php",
                 "7-100",
                 "php vendor/bin/phpunit -c phpunit.xml.dist FilterColumnsTest tests/Filters/FilterColumnsTest.php"
+            ],
+            [
+                "  501 42435 38008   0  9:33AM ??         0:00.13 php vendor/bin/phpunit -c phpunit.xml.dist FilterColumnsTest tests/Filters/FilterColumnsTest.php",
+                "0",
+                "501"
             ]
         ];
     }

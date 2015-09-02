@@ -71,7 +71,7 @@ class FilterColumns
         RequireStringy::checkMixed($columnNos, E4xx_UnsupportedType::class);
         RequireStringy::checkMixed($columnSeparator, E4xx_UnsupportedType::class);
 
-        $colsToMatch = ExpandRange::from($columnNos);
+        $colsToMatch = array_flip(ExpandRange::from($columnNos));
         return self::filterLine($data, $columnSeparator, $colsToMatch);
     }
 
@@ -94,7 +94,7 @@ class FilterColumns
         RequireStringy::checkMixed($columnNos, E4xx_UnsupportedType::class);
         RequireStringy::checkMixed($columnSeparator, E4xx_UnsupportedType::class);
 
-        $colsToMatch = ExpandRange::from($columnNos);
+        $colsToMatch = array_flip(ExpandRange::from($columnNos));
         return self::filterArray($data, $columnSeparator, $colsToMatch);
     }
 
@@ -171,21 +171,15 @@ class FilterColumns
      */
     private static function filterLine($line, $columnSeparator, $columnNos)
     {
-        $retval = [];
-        $parts = array_filter(explode($columnSeparator, $line), function($part) {
+        // filter out where multiple column separators are next to each other
+        $parts = array_values(array_filter(explode($columnSeparator, $line), function($part) {
             return (trim(rtrim($part)) != '');
-        });
+        }));
 
-        $currentCol = 0;
-        foreach($parts as $part) {
-            if ($currentCol == $columnNos[0]) {
-                $retval[] = $part;
-                array_shift($columnNos);
-            }
+        // extract the columns that we want
+        $retval = array_intersect_key($parts, $columnNos);
 
-            $currentCol++;
-        }
-
+        // all done
         return implode($columnSeparator, $retval);
     }
 }
