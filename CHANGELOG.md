@@ -4,6 +4,7 @@
 
 ### New
 
+* Editors\ReplaceMatchingRegex - search and replace using `preg_replace()`
 * Editors\ReplaceMatchingString - search and replace using `str_replace()`
 * Editors\TrimWhitespace - removes leading and trailing whitespace
 
