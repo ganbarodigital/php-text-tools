@@ -4,6 +4,14 @@
 
 Nothing yet.
 
+## 1.2.0 - Thu Sep 17 2015
+
+### New
+
+* Editors\ReplaceMatchingRegex - search and replace using `preg_replace()`
+* Editors\ReplaceMatchingString - search and replace using `str_replace()`
+* Editors\TrimWhitespace - removes leading and trailing whitespace
+
 ## 1.1.2 - Wed Sep 2 2015
 
 ### Fixes
