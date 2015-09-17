@@ -4,6 +4,7 @@
 
 ### New
 
+* Editors\ReplaceMatchingString - search and replace using `str_replace()`
 * Editors\TrimWhitespace - removes leading and trailing whitespace
 
 ## 1.1.2 - Wed Sep 2 2015
