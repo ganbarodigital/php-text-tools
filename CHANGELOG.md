@@ -2,7 +2,9 @@
 
 ## develop branch
 
-Nothing yet.
+### New
+
+* Editors\TrimWhitespace - removes leading and trailing whitespace
 
 ## 1.1.2 - Wed Sep 2 2015
 
