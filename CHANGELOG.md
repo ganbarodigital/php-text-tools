@@ -4,6 +4,10 @@
 
 Nothing yet.
 
+### Test Fixes
+
+* E4xx_UnsupportedType - fixed test to work with latest Exceptions release
+
 ## 1.2.0 - Thu Sep 17 2015
 
 ### New
