@@ -2,6 +2,10 @@
 
 ## develop branch
 
+Nothing yet.
+
+## 1.3.0 - Wed Oct 7 2015
+
 ### New
 
 * Filters\FilterOutEmptyValues - strip empty values from the input data
