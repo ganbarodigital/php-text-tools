@@ -4,6 +4,12 @@
 
 Nothing yet.
 
+## 1.4.0 - Sat Oct 24 2015
+
+### New
+
+* Operators\CompareTwoStrings - less than / greater than / both are equal calculation
+
 ## 1.3.0 - Wed Oct 7 2015
 
 ### New

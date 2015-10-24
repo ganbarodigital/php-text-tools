@@ -1,4 +1,4 @@
-# PHP DateTime
+# PHP Text Tools
 
 [![GitHub license](https://img.shields.io/badge/license-New%20BSD-blue.svg)](https://raw.githubusercontent.com/ganbarodigital/php-text-tools/develop/LICENSE.md)
 [![@ganbarodigital on Twitter](http://img.shields.io/badge/twitter-%40ganbarodigital-blue.svg?style=flat)](https://twitter.com/ganbarodigital)
