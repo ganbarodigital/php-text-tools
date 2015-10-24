@@ -2,6 +2,10 @@
 
 ## develop branch
 
+Nothing yet.
+
+## 1.4.0 - Sat Oct 24 2015
+
 ### New
 
 * Operators\CompareTwoStrings - less than / greater than / both are equal calculation
